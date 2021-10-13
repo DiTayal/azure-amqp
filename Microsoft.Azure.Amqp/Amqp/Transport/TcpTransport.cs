@@ -12,11 +12,11 @@ namespace Microsoft.Azure.Amqp.Transport
         static readonly SegmentBufferPool SmallBufferPool = new SegmentBufferPool(FixedWidth.ULong, 100000);
         static readonly EventHandler<SocketAsyncEventArgs> onWriteComplete = OnWriteComplete;
         static readonly EventHandler<SocketAsyncEventArgs> onReadComplete = OnReadComplete;
-        readonly Socket socket;
-        readonly string localEndPoint;
-        readonly string remoteEndPoint;
-        readonly WriteAsyncEventArgs sendEventArgs;
-        readonly ReadAsyncEventArgs receiveEventArgs;
+        public readonly Socket socket;
+        public readonly string localEndPoint;
+        public readonly string remoteEndPoint;
+        public readonly WriteAsyncEventArgs sendEventArgs;
+        public readonly ReadAsyncEventArgs receiveEventArgs;
         ITransportMonitor monitor;
 
         public TcpTransport(Socket socket, TcpTransportSettings transportSettings)
@@ -307,7 +307,7 @@ namespace Microsoft.Azure.Amqp.Transport
             }
         }
 
-        sealed class WriteAsyncEventArgs : SocketAsyncEventArgs
+        public sealed class WriteAsyncEventArgs : SocketAsyncEventArgs
         {
             readonly BufferSizeTracker writeTracker;
             Timestamp startTime;
@@ -354,7 +354,7 @@ namespace Microsoft.Azure.Amqp.Transport
             }
         }
 
-        sealed class ReadAsyncEventArgs : SocketAsyncEventArgs
+       public  sealed class ReadAsyncEventArgs : SocketAsyncEventArgs
         {
             readonly BufferSizeTracker readTracker;
             int bufferSize;

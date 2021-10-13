@@ -13,11 +13,11 @@ namespace Microsoft.Azure.Amqp.Transport
         static readonly AsyncCallback onOpenComplete = OnOpenComplete;
         static readonly AsyncCallback onWriteComplete = OnWriteComplete;
         static readonly AsyncCallback onReadComplete = OnReadComplete;
-        readonly TransportBase innerTransport;
-        protected readonly CustomSslStream sslStream;
-        TlsTransportSettings tlsSettings;
-        OperationState writeState;
-        OperationState readState;
+        public readonly TransportBase innerTransport;
+        public  readonly CustomSslStream sslStream;
+        public TlsTransportSettings tlsSettings;
+        public OperationState writeState;
+        public OperationState readState;
 
         public TlsTransport(TransportBase innerTransport, TlsTransportSettings tlsSettings)
             : base("tls", innerTransport.Identifier)
@@ -273,7 +273,7 @@ namespace Microsoft.Azure.Amqp.Transport
             this.sslStream?.Dispose();
         }
 
-        struct OperationState
+        public struct OperationState
         {
             public TransportAsyncCallbackArgs Args;
 

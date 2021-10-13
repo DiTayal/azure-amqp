@@ -84,6 +84,7 @@ namespace Microsoft.Azure.Amqp.Transport
 
         public Task<TransportBase> ConnectTaskAsync(TimeSpan timeout)
         {
+           
             var tcs = new TaskCompletionSource<TransportBase>();
             var args = new TransportAsyncCallbackArgs
             {

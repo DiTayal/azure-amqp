@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
 namespace Microsoft.Azure.Amqp.Transport
 {
     using System;
     using System.Net;
     using System.Net.Sockets;
+
 
     sealed class TcpTransportInitiator : TransportInitiator
     {
@@ -40,6 +40,8 @@ namespace Microsoft.Azure.Amqp.Transport
             // They suggest either using static Connect API or IP address directly.
             bool connectResult = Socket.ConnectAsync(SocketType.Stream, ProtocolType.Tcp, connectEventArgs);
 #endif
+            //connectEventArgs.SocketError = SocketError.Success;
+            //connectEventArgs.ConnectSocket = 1;
             if (connectResult)
             {
                 return true;
@@ -81,6 +83,10 @@ namespace Microsoft.Azure.Amqp.Transport
                     Fx.Assert(e.ConnectSocket != null, "Must have a valid socket accepted.");
                     e.ConnectSocket.NoDelay = true;
                     transport = new TcpTransport(e.ConnectSocket, this.transportSettings);
+
+                    //string jsonString = JsonSerializer.Serialize(e.ConnectSocket);
+                    //Console.WriteLine(jsonString);
+
                     transport.Open();
                 }
                 catch (Exception exp) when (!Fx.IsFatal(exp))
