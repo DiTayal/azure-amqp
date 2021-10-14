@@ -6,7 +6,6 @@ namespace Microsoft.Azure.Amqp.Transport
     using System;
     using System.Net.Sockets;
     using Microsoft.Azure.Amqp.Encoding;
-
     sealed class TcpTransport : TransportBase
     {
         static readonly SegmentBufferPool SmallBufferPool = new SegmentBufferPool(FixedWidth.ULong, 100000);
@@ -81,7 +80,9 @@ namespace Microsoft.Azure.Amqp.Transport
                 this.sendEventArgs.BufferList = buffers;
             }
 
-            this.sendEventArgs.Args = args;
+            this.sendEventArgs.Args = args;          
+          
+           
             if (!this.socket.SendAsync(this.sendEventArgs))
             {
                 this.HandleWriteComplete(args, true);
